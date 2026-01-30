@@ -1,0 +1,56 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    
+    def append(self, data):
+        new_node = Node(data)
+        if self.head == None:
+            self.head = new_node
+            return
+        
+        temp = self.head
+        while temp.next != None:
+            temp = temp.next
+        temp.next = new_node
+    
+    def reverse(self):
+        # reverse the linked list
+        prev = None
+        current = self.head
+        
+        while current != None:
+            next = current.next  # save next
+            current.next = prev  # reverse pointer
+            prev = current       # move prev up
+            current = next       # move current up
+        
+        self.head = prev  # update head
+    
+    def print_list(self):
+        temp = self.head
+        while temp != None:
+            print(temp.data, end=" -> ")
+            temp = temp.next
+        print("None")
+
+
+# testing
+list = LinkedList()
+list.append(1)
+list.append(2)
+list.append(3)
+list.append(4)
+list.append(5)
+
+print("original list:")
+list.print_list()
+
+list.reverse()
+
+print("reversed list:")
+list.print_list()
